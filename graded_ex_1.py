@@ -54,9 +54,11 @@ def display_categories():
     print("Available Product Categories:")
     for idx, category in enumerate(products.keys(), 1):
         print(f"{idx}. {category}")
+
     while True:
         try:
             category_choice = int(input("\nEnter the number of the category you'd like to explore: "))
+            print(f"User selected: {category_choice}")
             if 1 <= category_choice <= len(products):
                 return category_choice - 1 
             else:
