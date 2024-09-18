@@ -54,6 +54,16 @@ def display_categories():
     print("Available Product Categories:")
     for idx, category in enumerate(products.keys(), 1):
         print(f"{idx}. {category}")
+    while True:
+        try:
+            category_choice = int(input("\nEnter the number of the category you'd like to explore: "))
+            if 1 <= category_choice <= len(products):
+                return category_choice - 1 
+            else:
+                print("Invalid choice!Please select a valid category number again:")
+        except ValueError:
+            print("Please enter a valid number!")
+            
 
 
 
@@ -107,7 +117,8 @@ def validate_name(name):
 
 
 def validate_email(email):
-    return "@" in email; 
+    email = email.strip()
+    return "@" in email
 
 def main():
     print("Welcome to an online shopping store!")
@@ -122,26 +133,23 @@ def main():
             print("Invalid name!")
             print("Please enter a valid name again(only alphabets): ")
 
-    #Enter and validate the email
-        email = input("Please enter your email address: ")
-        while not validate_email(email):
-            print("Invalid email!")
-            print("Please enter a valid email address again: ")
+    while True:
+        email = input("Enter your email: ")
+        if validate_email(email):
+            break
+        print("Invalid email. Please enter a valid email.")
 
     cart = []
     total_cost = 0
 
     while True:
-        display_categories()
-        category_choice = input("Choose a category (enter number): ")
-        
-        if not category_choice.isdigit() or int(category_choice) not in range(1, len(products) + 1):
-            print("Invalid choice. Please enter a valid category number.")
-            continue
+        #user choose category
+        category_index = display_categories()
+        selected_category = list(products.keys())[category_index]
+        print(f"Select one category: {selected_category}")
 
-        category = list(products.keys())[int(category_choice) - 1]
-        products_list = products[category]
-
+        #show all the products under selected category
+        products_list = products[selected_category]
         while True:
             display_products(products_list)
 
@@ -218,4 +226,3 @@ It also checks that this is the module that's being run directly, and not being 
 In that case, only the part that's needed will be executed and not the entire program """
 if __name__ == "__main__":
     main()
-
