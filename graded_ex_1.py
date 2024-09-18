@@ -54,19 +54,18 @@ def display_categories():
     print("Available Product Categories:")
     for idx, category in enumerate(products.keys(), 1):
         print(f"{idx}. {category}")
-
+    
     while True:
         try:
             category_choice = int(input("\nEnter the number of the category you'd like to explore: "))
-            print(f"User selected: {category_choice}")
             if 1 <= category_choice <= len(products):
-                return category_choice - 1 
+                return category_choice - 1
             else:
-                print("Invalid choice!Please select a valid category number again:")
+                print("Invalid choice! Please select a valid category number again.")
+                return None
         except ValueError:
-            print("Please enter a valid number!")
-            
-
+            print("Invalid input! Please enter a valid number.")
+            return None
 
 
 def add_to_cart(cart, product, quantity):
