@@ -118,9 +118,11 @@ def validate_name(name):
 
 def validate_email(email):
     email = email.strip()
-    
-    if "@" in email and "." in email[email.index("@"):]:
-        return True
+
+    if "@" in email:
+        part1, part2 = email.split("@", 1)
+        if "." in part2 and part1 and part2:
+            return True
     return False
 
 def main():
